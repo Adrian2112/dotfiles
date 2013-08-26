@@ -14,8 +14,8 @@ map <c-m> <c-w>>
 
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 
-autocmd! BufNewFile,BufReadPre,FileReadPre *.rb so ~/.janus/ruby/ruby.vim
-autocmd! BufNewFile,BufReadPre,FileReadPre *.erb so ~/.janus/ruby/ruby.vim
+" autocmd! BufNewFile,BufReadPre,FileReadPre *.rb so ~/.janus/ruby/ruby.vim
+" autocmd! BufNewFile,BufReadPre,FileReadPre *.erb so ~/.janus/ruby/ruby.vim
 
 set wrap
 set linebreak
@@ -25,14 +25,18 @@ set relativenumber
 set cursorline
 
 set guioptions-=T
-
 if &term =~ "xterm-256color"
   colorscheme wombat256
   set mouse=a
 else
-  colorscheme railscasts
+  colorscheme railscasts2
 endif 
 
 set vb
 
 set clipboard=unnamed
+set nofoldenable
+
+set guioptions=
+
+au BufRead,BufNewFile *.pde,*.ino set filetype=c
