@@ -40,3 +40,5 @@ set nofoldenable
 set guioptions=
 
 au BufRead,BufNewFile *.pde,*.ino set filetype=c
+
+hi LineNr guibg=#2B2B2B
