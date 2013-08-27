@@ -42,3 +42,6 @@ set guioptions=
 au BufRead,BufNewFile *.pde,*.ino set filetype=c
 
 hi LineNr guibg=#2B2B2B
+
+au BufRead,BufNewFile *.pde set filetype=arduino
+au BufRead,BufNewFile *.ino set filetype=arduino
