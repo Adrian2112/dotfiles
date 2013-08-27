@@ -10,3 +10,6 @@
 [submodule "janus/zencoding-vim"]
 	path = janus/zencoding-vim
 	url = git://github.com/terryma/vim-multiple-cursors.git
+[submodule "janus/vim-arduino-syntax"]
+	path = janus/vim-arduino-syntax
+	url = git@github.com:sudar/vim-arduino-syntax.git
