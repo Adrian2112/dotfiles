@@ -45,3 +45,6 @@ hi LineNr guibg=#2B2B2B
 
 au BufRead,BufNewFile *.pde set filetype=arduino
 au BufRead,BufNewFile *.ino set filetype=arduino
+
+set autoindent
+
