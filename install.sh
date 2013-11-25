@@ -29,3 +29,8 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+# copy theme to zsh dir
+echo "copy agonz theme to zsh theme dir"
+cp agonz.zsh-theme ~/.oh-my-zsh/themes/
+echo "..done"
