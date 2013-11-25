@@ -34,7 +34,7 @@ plugins=(git vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:/Users/adrian/.rvm/bin
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:$PATH
 
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -47,4 +47,7 @@ bindkey "^E" end-of-line
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
+PATH=/usr/local/bin:$PATH
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+source /Users/adrian/.rvm/scripts/rvm
