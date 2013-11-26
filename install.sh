@@ -20,7 +20,7 @@ echo "...done"
 # change to the dotfiles directory
 echo "Changing to the $dir directory"
 cd $dir
-echo "...done"
+echo "...done\n"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
@@ -29,8 +29,20 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+echo "...done\n"
 
-# copy theme to zsh dir
+# symlink theme to zsh dir
 echo "copy agonz theme to zsh theme dir"
-cp agonz.zsh-theme ~/.oh-my-zsh/themes/
-echo "..done"
+  ln -s $dir/agonz.zsh-theme ~/.oh-my-zsh/themes/agonz.zsh-theme
+echo "...done\n"
+
+# symlink janus directory to ~
+echo "copying janus dir to ~"
+ln -s $dir/janus ~/.janus
+echo "...done\n"
+
+# pull submodules
+echo "fetching submodules"
+git submodule init
+git submodule update
+echo "...done\n"
