@@ -46,6 +46,7 @@ bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
+bindkey '^R' history-incremental-search-backward
 
 PATH=/usr/local/bin:$PATH
 
