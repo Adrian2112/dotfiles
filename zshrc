@@ -50,5 +50,8 @@ bindkey '^R' history-incremental-search-backward
 
 PATH=/usr/local/bin:$PATH
 
+# add postgres.app to the PATH
+PATH="/Applications/Postgres93.app/Contents/MacOS/bin:$PATH"
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 source /Users/adrian/.rvm/scripts/rvm
