@@ -1,6 +1,8 @@
 nmap <leader>z :NERDTreeFind<cr>
 nmap <leader>b :BuffergatorToggle<cr>
 
+nmap <c-w><space> :FSHere<cr>
+
 set hidden
 
 :noremap <silent> <c-l> :nohls<cr><c-l>
