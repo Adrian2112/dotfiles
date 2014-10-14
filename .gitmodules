@@ -3,16 +3,13 @@
 	url = https://github.com/vim-scripts/Auto-Pairs.git
 [submodule "janus/vim-arduino"]
 	path = janus/vim-arduino
-	url = git@github.com:tclem/vim-arduino.git
+	url = https://github.com/tclem/vim-arduino.git
 [submodule "janus/vim-multiple-cursors"]
 	path = janus/vim-multiple-cursors
-	url = git://github.com/terryma/vim-multiple-cursors.git
-[submodule "janus/zencoding-vim"]
-	path = janus/zencoding-vim
-	url = git://github.com/terryma/vim-multiple-cursors.git
+	url = https://github.com/terryma/vim-multiple-cursors.git
 [submodule "janus/vim-arduino-syntax"]
 	path = janus/vim-arduino-syntax
-	url = git@github.com:sudar/vim-arduino-syntax.git
+	url = https://github.com/sudar/vim-arduino-syntax.git
 [submodule "vim-fswitch"]
 	path = janus/vim-fswitch
 	url = https://github.com/derekwyatt/vim-fswitch.git

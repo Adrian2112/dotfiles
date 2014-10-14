@@ -50,3 +50,4 @@ au BufRead,BufNewFile *.ino set filetype=arduino
 
 set autoindent
 
+nnoremap <leader>. :CtrlPTag<cr>
