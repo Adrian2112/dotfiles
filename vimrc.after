@@ -68,3 +68,10 @@ nnoremap FF :Ack "\b<C-R><C-W>\b"<CR>
 
 " bind gb to :Gblame
 nnoremap gb :Gblame<CR>
+
+" change ctrl-w ctrl-o (:only) to ctrl-w o so we use zoomwin
+map <C-w><C-o> <C-w>o
+
+" remove FocusGained for nerd tree
+" http://stackoverflow.com/questions/27347931/disable-root-node-refresh-on-window-focus
+autocmd! AuNERDTreeCmd FocusGained
