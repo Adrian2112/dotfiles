@@ -78,3 +78,11 @@ autocmd! AuNERDTreeCmd FocusGained
 
 " show cmd being entered
 set showcmd
+" save every 1 minutes
+let g:session_autosave_periodic = 1
+" load last session
+let g:session_default_to_last = 1
+let g:session_autoload = 'yes'
+
+" Disable all session locking - I know what I'm doing :-). -- I guess...
+let g:session_lock_enabled = 0"
