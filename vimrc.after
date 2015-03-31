@@ -11,9 +11,6 @@ nmap <space> zz
 nmap N Nzz
 nmap n nzz
 
-map <c-n> <c-w><
-map <c-m> <c-w>>
-
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 
 " autocmd! BufNewFile,BufReadPre,FileReadPre *.rb so ~/.janus/ruby/ruby.vim
