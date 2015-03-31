@@ -13,3 +13,9 @@
 [submodule "vim-fswitch"]
 	path = janus/vim-fswitch
 	url = https://github.com/derekwyatt/vim-fswitch.git
+[submodule "janus/vim-misc"]
+	path = janus/vim-misc
+	url = https://github.com/xolox/vim-misc.git
+[submodule "janus/vim-session"]
+	path = janus/vim-session
+	url = https://github.com/xolox/vim-session.git
