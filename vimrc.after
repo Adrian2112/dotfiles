@@ -78,6 +78,9 @@ autocmd! AuNERDTreeCmd FocusGained
 
 " show cmd being entered
 set showcmd
+
+map <leader>nn :NERDTreeToggle<CR>
+
 " save every 1 minutes
 let g:session_autosave_periodic = 1
 " load last session
