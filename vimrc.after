@@ -75,3 +75,6 @@ map <C-w><C-o> <C-w>o
 " remove FocusGained for nerd tree
 " http://stackoverflow.com/questions/27347931/disable-root-node-refresh-on-window-focus
 autocmd! AuNERDTreeCmd FocusGained
+
+" show cmd being entered
+set showcmd
