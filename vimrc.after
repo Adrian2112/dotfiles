@@ -19,6 +19,8 @@ let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 " autocmd! BufNewFile,BufReadPre,FileReadPre *.rb so ~/.janus/ruby/ruby.vim
 " autocmd! BufNewFile,BufReadPre,FileReadPre *.erb so ~/.janus/ruby/ruby.vim
 
+autocmd FileType scheme colorscheme default
+
 set wrap
 set linebreak
 set nolist  " list disables linebreak
@@ -49,4 +51,6 @@ au BufRead,BufNewFile *.pde set filetype=arduino
 au BufRead,BufNewFile *.ino set filetype=arduino
 
 set autoindent
+
+let g:slime_target = "tmux"
 
