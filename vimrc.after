@@ -84,3 +84,6 @@ map <leader>nn :NERDTreeToggle<CR>
 " load last session
 let g:session_autoload = 'yes'
 let g:session_autosave = 'no'
+
+
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }

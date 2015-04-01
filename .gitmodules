@@ -19,3 +19,6 @@
 [submodule "janus/vim-session"]
 	path = janus/vim-session
 	url = https://github.com/xolox/vim-session.git
+[submodule "janus/ctrlp-cmatcher"]
+	path = janus/ctrlp-cmatcher
+	url = https://github.com/JazzCore/ctrlp-cmatcher.git
