@@ -16,6 +16,8 @@ let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 " autocmd! BufNewFile,BufReadPre,FileReadPre *.rb so ~/.janus/ruby/ruby.vim
 " autocmd! BufNewFile,BufReadPre,FileReadPre *.erb so ~/.janus/ruby/ruby.vim
 
+autocmd FileType scheme colorscheme default
+
 set wrap
 set linebreak
 set nolist  " list disables linebreak
@@ -85,5 +87,5 @@ map <leader>nn :NERDTreeToggle<CR>
 let g:session_autoload = 'yes'
 let g:session_autosave = 'no'
 
-
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+let g:slime_target = "tmux"
