@@ -11,9 +11,6 @@ nmap <space> zz
 nmap N Nzz
 nmap n nzz
 
-map <c-n> <c-w><
-map <c-m> <c-w>>
-
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 
 " autocmd! BufNewFile,BufReadPre,FileReadPre *.rb so ~/.janus/ruby/ruby.vim
@@ -52,5 +49,42 @@ au BufRead,BufNewFile *.ino set filetype=arduino
 
 set autoindent
 
-let g:slime_target = "tmux"
+nnoremap <leader>. :CtrlPTag<cr>
 
+let g:gitgutter_realtime = 0
+
+" use silver_searcher instead of Ack for search
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" use ag for ctrl-p indexing
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'
+
+" bind K to grep word under cursor
+nnoremap FF :Ack "\b<C-R><C-W>\b"<CR>
+
+" bind gb to :Gblame
+nnoremap gb :Gblame<CR>
+
+" change ctrl-w ctrl-o (:only) to ctrl-w o so we use zoomwin
+map <C-w><C-o> <C-w>o
+
+" remove FocusGained for nerd tree
+" http://stackoverflow.com/questions/27347931/disable-root-node-refresh-on-window-focus
+autocmd! AuNERDTreeCmd FocusGained
+
+" show cmd being entered
+set showcmd
+
+map <leader>nn :NERDTreeToggle<CR>
+
+" load last session
+let g:session_autoload = 'yes'
+let g:session_autosave = 'no'
+
+let g:slime_target = "tmux"
