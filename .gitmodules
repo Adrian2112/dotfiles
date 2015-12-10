@@ -22,3 +22,18 @@
 [submodule "janus/ctrlp-cmatcher"]
 	path = janus/ctrlp-cmatcher
 	url = https://github.com/JazzCore/ctrlp-cmatcher.git
+[submodule "elm-vim"]
+	path = janus/elm-vim
+	url = https://github.com/ElmCast/elm-vim.git
+[submodule "rust.vim"]
+	path = janus/rust.vim
+	url = https://github.com/rust-lang/rust.vim.git
+[submodule "vim-slime"]
+	path = janus/vim-slime
+	url = https://github.com/jpalardy/vim-slime.git
+[submodule "vim-toml"]
+	path = janus/vim-toml
+	url = https://github.com/cespare/vim-toml.git
+[submodule "emmet-vim"]
+	path = janus/emment-vim
+	url = https://github.com/mattn/emmet-vim.git
