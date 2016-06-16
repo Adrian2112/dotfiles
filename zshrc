@@ -29,7 +29,7 @@ ZSH_THEME="agonz"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git vi-mode)
+plugins=(git vi-mode history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -44,8 +44,6 @@ DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
 bindkey '^R' history-incremental-search-backward
 
 PATH=/usr/local/bin:$PATH
