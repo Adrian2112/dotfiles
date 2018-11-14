@@ -46,3 +46,17 @@ echo "fetching submodules"
 git submodule init
 git submodule update
 echo "...done\n"
+
+echo "install the_silver_searcher:"
+echo "brew install the_silver_searcher"
+
+echo "install ctrlp-cmatcher: "
+echo "
+export CFLAGS=-Qunused-arguments
+export CPPFLAGS=-Qunused-arguments
+~/.janus/ctrlp-cmatcher/install.sh
+"
+
+
+
+
