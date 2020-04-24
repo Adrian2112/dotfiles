@@ -1,8 +1,6 @@
 nmap <leader>z :NERDTreeFind<cr>
 nmap <leader>b :BuffergatorToggle<cr>
 
-nmap <c-w><space> :FSHere<cr>
-
 set hidden
 
 :noremap <silent> <c-l> :nohls<cr><c-l>
@@ -49,21 +47,35 @@ au BufRead,BufNewFile *.ino set filetype=arduino
 
 set autoindent
 
-nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>. :Tags<cr>
 
 let g:gitgutter_realtime = 0
 
+nnoremap <C-p> :Files<Cr>
+
 " use silver_searcher instead of Ack for search
-let g:ackprg = 'ag --nogroup --nocolor --column'
+"let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " use ag for ctrl-p indexing
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore "**/*.pyc"
-      \ -g ""'
+"let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+"      \ --ignore .git
+"      \ --ignore .svn
+"      \ --ignore .hg
+"      \ --ignore .DS_Store
+"      \ --ignore "**/*.pyc"
+"      \ -g ""'
+
+"let g:ctrlp_map='<c-p>'
+"let g:ctrlp_cmd = 'call CallCtrlP()'
+
+"func! CallCtrlP()
+"    if exists('s:called_ctrlp')
+"        CtrlPLastMode
+"    else
+"        let s:called_ctrlp = 1
+"        CtrlPMRU
+"    endif
+"endfunc
 
 " bind K to grep word under cursor
 nnoremap FF :Ack "\b<C-R><C-W>\b"<CR>
@@ -87,5 +99,28 @@ map <leader>nn :NERDTreeToggle<CR>
 let g:session_autoload = 'yes'
 let g:session_autosave = 'no'
 
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+"let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 let g:slime_target = "tmux"
+
+" open current file in new tab
+nnoremap <silent> <C-w>t :tab split<CR>
+
+let g:indent_guides_enable_on_vim_startup = 1
+
+map <leader>r :Rails<CR>
+map <leader>R :.Rails<CR>
+map <C-c> :Econtroller 
+map <C-f> :Efixture 
+map <C-k> :Emodel 
+
+command CpFileName !echo % | pbcopy
+
+""" remove autocomplete from include files
+set complete-=i
+
+""" repairpal
+highlight ColorColumn ctermbg=magenta guibg=#9b9b9b
+call matchadd('ColorColumn', '\%121v', 100)
+
+""" disabled Ex mode (the one that asks for visual to exit)
+:nnoremap Q <Nop>
