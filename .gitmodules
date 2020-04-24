@@ -52,3 +52,9 @@
 [submodule "janus/vim-projectionist"]
 	path = janus/vim-projectionist
 	url = https://github.com/tpope/vim-projectionist.git
+[submodule "janus/fzf"]
+	path = janus/fzf
+	url = https://github.com/junegunn/fzf.git
+[submodule "janus/fzf.vim"]
+	path = janus/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
