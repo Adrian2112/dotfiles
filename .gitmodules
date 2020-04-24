@@ -25,9 +25,6 @@
 [submodule "elm-vim"]
 	path = janus/elm-vim
 	url = https://github.com/ElmCast/elm-vim.git
-[submodule "rust.vim"]
-	path = janus/rust.vim
-	url = https://github.com/rust-lang/rust.vim.git
 [submodule "vim-slime"]
 	path = janus/vim-slime
 	url = https://github.com/jpalardy/vim-slime.git
@@ -37,3 +34,21 @@
 [submodule "emmet-vim"]
 	path = janus/emment-vim
 	url = https://github.com/mattn/emmet-vim.git
+[submodule "janus/vim-slim"]
+	path = janus/vim-slim
+	url = https://github.com/slim-template/vim-slim.git
+[submodule "janus/matchit.zip"]
+	path = janus/matchit.zip
+	url = https://github.com/vim-scripts/matchit.zip.git
+[submodule "janus/vim-indent-guides"]
+	path = janus/vim-indent-guides
+	url = https://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "janus/vim-windowswap"]
+	path = janus/vim-windowswap
+	url = https://github.com/wesQ3/vim-windowswap.git
+[submodule "janus/vim-bundler"]
+	path = janus/vim-bundler
+	url = https://github.com/tpope/vim-bundler.git
+[submodule "janus/vim-projectionist"]
+	path = janus/vim-projectionist
+	url = https://github.com/tpope/vim-projectionist.git
