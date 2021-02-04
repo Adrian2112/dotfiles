@@ -64,3 +64,19 @@ export FZF_DEFAULT_COMMAND="rg --no-ignore-global --files --colors 'match:bg:yel
 eval "$(direnv hook zsh)"
 
 export PYTHONSTARTUP=$HOME/.pythonstartup.py
+
+# delete squash merged branches
+# https://github.com/not-an-aardvark/git-delete-squashed#sh
+g_delete_squash_merged() {
+  main_branch=`git remote show origin | grep "HEAD branch" | awk '{print $3}'`
+  merged_branches=`git checkout -q $main_branch && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base $main_branch $branch) && [[ $(git cherry $main_branch $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch"; done`
+  echo $merged_branches && echo '\ndelete?' && read && echo $merged_branches | xargs -n 1 git branch -D
+  unset main_branch
+  unset merged_branches
+}
+
+# delete merged branches
+g_delete_merged() {
+  main_branch=`git remote show origin | grep "HEAD branch" | awk '{print $3}'`
+  git branch --merged $main_branch | grep -v '\(master\|\*\|develop\)' | xargs -n 1 echo && echo '\ndelete?' && read && git branch --merged $main_branch | grep -v '\(master\|\*\|develop\)' | xargs -n 1 git branch -d
+}
