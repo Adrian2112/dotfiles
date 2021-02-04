@@ -58,7 +58,7 @@ export GIT_PAGER="less -F -X" # tell less not to paginate if less than a page
 # load other zshrc configs
 test -f ~/.zshrc_* && source ~/.zshrc_*
 
-export FZF_DEFAULT_COMMAND="rg --no-ignore-global --files --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'path:fg:green' --colors 'path:style:bold' --colors 'line:fg:yellow' --colors 'line:style:bold'"
+export FZF_DEFAULT_COMMAND="rg --no-ignore-exclude --files --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'path:fg:green' --colors 'path:style:bold' --colors 'line:fg:yellow' --colors 'line:style:bold'"
 
 # direnv to load .envrc to ENV
 eval "$(direnv hook zsh)"
