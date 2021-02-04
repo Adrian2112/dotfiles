@@ -61,3 +61,6 @@
 [submodule "janus/vim-ruby"]
 	path = janus/vim-ruby
 	url = https://github.com/vim-ruby/vim-ruby.git
+[submodule "janus/vim-rhubarb"]
+	path = janus/vim-rhubarb
+	url = https://github.com/tpope/vim-rhubarb.git
