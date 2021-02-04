@@ -124,3 +124,9 @@ call matchadd('ColorColumn', '\%121v', 100)
 
 """ disabled Ex mode (the one that asks for visual to exit)
 :nnoremap Q <Nop>
+
+""" vim-dispatch handlers for asyn jobs
+let g:dispatch_handlers = ['iterm', 'job']
+
+""" remove fullscreen touchbar item for macvim
+let g:macvim_default_touchbar_fullscreen=0
