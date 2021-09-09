@@ -130,3 +130,6 @@ let g:dispatch_handlers = ['iterm', 'job']
 
 """ remove fullscreen touchbar item for macvim
 let g:macvim_default_touchbar_fullscreen=0
+
+""" automaticallt reload file if it changes outside of vim
+set autoread

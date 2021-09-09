@@ -1,2 +1,5 @@
 let mapleader = ","
 call janus#disable_plugin('vroom')
+
+""" https://www.wiserfirst.com/blog/vim-tip-snipmate-legacy-parser-warning/
+let g:snipMate = { 'snippet_version' : 1 }
