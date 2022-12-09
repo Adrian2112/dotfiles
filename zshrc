@@ -29,7 +29,7 @@ ZSH_THEME="agonz"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git vi-mode history-substring-search)
+plugins=(vi-mode history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -51,7 +51,8 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # prevent closing window with ctrl-d
 set -o ignoreeof
-export GIT_PAGER="less -F -X" # tell less not to paginate if less than a page
+#export GIT_PAGER="diff-so-fancy"
+#export GIT_PAGER="less -F -X" # tell less not to paginate if less than a page
 
 # load other zshrc configs
 test -f ~/.zshrc_* && source ~/.zshrc_*
@@ -74,10 +75,31 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # delete squash merged branches
 # https://github.com/not-an-aardvark/git-delete-squashed#sh
 g_delete_squash_merged() {
+  current_branch=`git rev-parse --abbrev-ref HEAD`
   main_branch=`git remote show origin | grep "HEAD branch" | awk '{print $3}'`
   merged_branches=`git checkout -q $main_branch && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base $main_branch $branch) && [[ $(git cherry $main_branch $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch"; done`
   echo $merged_branches && echo '\ndelete?' && read && echo $merged_branches | xargs -n 1 git branch -D
+  git checkout $current_branch
+  unset current_branch
   unset main_branch
   unset merged_branches
 }
+git config --global alias.delete-squashed '!f() { local targetBranch=${1:-main} && git checkout -q $targetBranch && git branch --merged | grep -v "\*" | xargs -n 1 git branch -d && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base $targetBranch $branch) && [[ $(git cherry $targetBranch $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; true; done; }; f'
+
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
+alias pf="fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
+
+export FORGIT_INSTALL_DIR=/Users/adriangonzalez/Dev/forgit
+source $FORGIT_INSTALL_DIR/forgit.plugin.zsh
+# FORGIT_NO_ALIASES=1
+export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export XDG_CONFIG_HOME="$HOME"
+
+iphone_notify() {
+  msg=${1:-done}
+  curl -d $msg ntfy.sh/31c3e65947425c04dc2ed700d1f40ec1
+}
