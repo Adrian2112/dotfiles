@@ -80,8 +80,8 @@ nnoremap <C-p> :Files<Cr>
 " bind K to grep word under cursor
 nnoremap FF :Ack "\b<C-R><C-W>\b"<CR>
 
-" bind gb to :Gblame
-nnoremap gb :Gblame<CR>
+" bind gb to :Git blame
+nnoremap gb :Git blame<CR>
 
 " change ctrl-w ctrl-o (:only) to ctrl-w o so we use zoomwin
 map <C-w><C-o> <C-w>o
@@ -133,3 +133,57 @@ let g:macvim_default_touchbar_fullscreen=0
 
 """ automaticallt reload file if it changes outside of vim
 set autoread
+
+""" https://github.com/craigemery/vim-autotag#macos-python-38-and-spawn
+let g:autotagStartMethod='fork'
+
+set guifont=Menlo-Regular:h15
+
+""" https://github.com/preservim/nerdtree/issues/1321
+""" bug where bottom panel stays big
+let g:NERDTreeMinimalMenu=1
+
+imap <C-\> <Plug>(copilot-next)
+
+let g:rails_projections = {
+      \ "spec/factories/*.rb": {
+      \   "command": "factory",
+      \   "affinity": "collection",
+      \   "alternate": ["app/models/{singular}.rb", "app/models/{singular}.rb"],
+      \   "related": "db/schema.rb#{}",
+      \   "test": "spec/models/{singular}_test.rb",
+      \   "template": "FactoryBot.define do\n  factory :{singular} do\n  end\nend",
+      \   "keywords": "factory sequence"
+      \ },
+      \ "app/models/*.rb": {
+      \   "related": ["spec/factories/{singular}.rb", "spec/factories/{underscore|singular}.rb"],
+      \ }
+      \}
+
+command Especc :execute "Espec " . eval('substitute(expand("%:r"), "app/", "", "g")') . "!"
+command Efactoryc :execute "Efactory " . eval('substitute(substitute(expand("%:r"), ".*app/models/", "", "g"), "/", "_", "g")') . "!"
+
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
+imap <Tab> <Plug>snipMateNextOrTrigger
+
+function! SplitComma()
+  execute a:firstline . ',' . a:lastline . 's/\(,\|(\)/\1\r/g'
+  s/)/\r)/g
+  execute 'normal! =%'
+endfunction
+command! -range SplitComma <line1>,<line2> call SplitComma()
+
+let g:ruby_indet_assignment_style = "variable"
+"""    x = if condition
+"""      something
+"""    end
+let g:ruby_indent_hanging_elements = 0
+
+let g:splitjoin_ruby_curly_braces = 0
+let g:splitjoin_ruby_options_as_arguments = 1
+let g:splitjoin_ruby_hanging_args = 0
+
+""" go to beginning of line on command mode
+cnoremap <C-a> <C-b>
