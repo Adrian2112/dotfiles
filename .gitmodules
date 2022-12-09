@@ -73,3 +73,9 @@
 [submodule "janus/vim-rubocop"]
 	path = janus/vim-rubocop
 	url = https://github.com/ngmy/vim-ruboco.git
+[submodule "janus/splitjoin.vim"]
+	path = janus/splitjoin.vim
+	url = https://github.com/AndrewRadev/splitjoin.vim.git
+[submodule "janus/copilot.vim"]
+	path = janus/copilot.vim
+	url = https://github.com/github/copilot.vim.git
