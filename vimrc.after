@@ -3,7 +3,7 @@ nmap <leader>b :BuffergatorToggle<cr>
 
 set hidden
 
-:noremap <silent> <c-l> :nohls<cr><c-l>
+:noremap <silent> <c-l> :nohls<cr>
 
 nmap <space> zz
 nmap N Nzz
@@ -107,13 +107,10 @@ nnoremap <silent> <C-w>t :tab split<CR>
 
 let g:indent_guides_enable_on_vim_startup = 1
 
-map <leader>r :Rails<CR>
-map <leader>R :.Rails<CR>
-map <C-c> :Econtroller 
-map <C-f> :Efixture 
-map <C-k> :Emodel 
+command CpFilePath let @+ = expand("%")
+command CpFileFullPath let @+ = expand("%:p")
+command CpFileFileName let @+ = expand("%:t")
 
-command CpFileName !echo % | pbcopy
 
 """ remove autocomplete from include files
 set complete-=i
@@ -134,56 +131,102 @@ let g:macvim_default_touchbar_fullscreen=0
 """ automaticallt reload file if it changes outside of vim
 set autoread
 
-""" https://github.com/craigemery/vim-autotag#macos-python-38-and-spawn
-let g:autotagStartMethod='fork'
-
-set guifont=Menlo-Regular:h15
+set guifont=Menlo:h15
 
 """ https://github.com/preservim/nerdtree/issues/1321
 """ bug where bottom panel stays big
 let g:NERDTreeMinimalMenu=1
 
-imap <C-\> <Plug>(copilot-next)
-
 let g:rails_projections = {
+      \ "config/projections.json": {
+      \   "command": "projections"
+      \ },
       \ "spec/factories/*.rb": {
       \   "command": "factory",
-      \   "affinity": "collection",
-      \   "alternate": ["app/models/{singular}.rb", "app/models/{singular}.rb"],
-      \   "related": "db/schema.rb#{}",
-      \   "test": "spec/models/{singular}_test.rb",
-      \   "template": "FactoryBot.define do\n  factory :{singular} do\n  end\nend",
-      \   "keywords": "factory sequence"
+      \   "affinity": "model",
+      \   "alternate": "app/models/{singular}.rb",
+      \   "related": "db/schema.rb#{plural}",
+      \   "template": "FactoryBot.define do\n  factory :{underscore|singular} do\n  end\nend",
       \ },
       \ "app/models/*.rb": {
       \   "related": ["spec/factories/{singular}.rb", "spec/factories/{underscore|singular}.rb"],
-      \ }
+      \ },
+      \ "spec/models/*_spec.rb": {
+      \   "command": "spec",
+      \   "affinity": "model",
+      \   "related": "app/models/{singular}.rb",
+      \   "template": "describe {camelcase|capitalize|colons}, type: :model do\n\nend"
+      \ },
       \}
 
-command Especc :execute "Espec " . eval('substitute(expand("%:r"), "app/", "", "g")') . "!"
+command Especc :execute "Espec " . eval('substitute(expand("%:r"), "app/models", "", "g")') . "!"
 command Efactoryc :execute "Efactory " . eval('substitute(substitute(expand("%:r"), ".*app/models/", "", "g"), "/", "_", "g")') . "!"
+command EfactoryR :execute "Efactory " . eval('rails#singularize(expand("<cword>"))')
 
+""" define functions for fzf.vim
+command! -bang -nargs=? -complete=dir Factories call fzf#vim#files(<q-args> . 'spec/factories', fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=? -complete=dir Models call fzf#vim#files(<q-args> . 'app/models', fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=? -complete=dir Specs call fzf#vim#files(<q-args> . 'spec/', fzf#vim#with_preview({'source': 'ls */**/*_spec.rb'}), <bang>0)
+
+map <leader>r :Rails<CR>
+map <leader>R :.Rails<CR>
+map <C-c> :Econtroller 
+map <C-k> :Models<CR> 
+map <C-f> :Factories<CR>
+map <C-s> :Specs<CR>
+command RF :execute "EfactoryR"
+
+""" Copilot
+imap <C-\> <Plug>(copilot-next)
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
 imap <Tab> <Plug>snipMateNextOrTrigger
 
-function! SplitComma()
-  execute a:firstline . ',' . a:lastline . 's/\(,\|(\)/\1\r/g'
-  s/)/\r)/g
-  execute 'normal! =%'
-endfunction
-command! -range SplitComma <line1>,<line2> call SplitComma()
-
-let g:ruby_indet_assignment_style = "variable"
+let g:ruby_indent_assignment_style = 'variable'
 """    x = if condition
 """      something
 """    end
 let g:ruby_indent_hanging_elements = 0
 
+""" Splitjoin
+""" gS to split a one-liner into multiple lines
+""" gJ (with the cursor on the first line of a block) to join a block into a single-line statement.
 let g:splitjoin_ruby_curly_braces = 0
 let g:splitjoin_ruby_options_as_arguments = 1
 let g:splitjoin_ruby_hanging_args = 0
 
+let g:NERDDefaultAlign = 'left'
+
 """ go to beginning of line on command mode
 cnoremap <C-a> <C-b>
+
+let g:ale_fixers = {'ruby': ['rubocop'], 'javascript': ['eslint'], 'javascriptreact': ['eslint'], 'sql': ['sqlformat']}
+let g:ale_fix_on_save = 1
+
+let g:ale_linters = {'ruby': ['rubocop'], 'javascript': ['eslint'], 'javascriptreact': ['eslint'], 'sql': ['sqlint', 'sqlformat', 'sqllint', 'sqlfluff']}
+let g:ale_linters_explicit = 1
+let g:ale_ruby_rubocop_options = '--except RSpec/Focus,Naming/BlockForwarding'
+
+let g:ale_pattern_options_enabled = 1
+let g:ale_pattern_options = { 'db/schema.rb': { 'ale_enabled': 0 } }
+
+" gem install seeing_is_believing
+" Enable seeing-is-believing mappings only for Ruby
+augroup seeingIsBelievingSettings
+  autocmd!
+
+  autocmd FileType ruby nmap <buffer> <F12> <Plug>(seeing-is-believing-mark-and-run)
+  autocmd FileType ruby xmap <buffer> <F12> <Plug>(seeing-is-believing-mark-and-run)
+
+  autocmd FileType ruby nmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+  autocmd FileType ruby xmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+  autocmd FileType ruby imap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+
+  autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing-is-believing-run)
+  autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing-is-believing-run)
+
+  " clear the results
+  nmap <F7> :silent! %s/\s\+# =>.*$\\|^#\s[>!\~]>\(\s.*\)\?$//g \| :silent! %s#\($\n\s*\)\+\%$##<CR>
+  xmap <F7> :silent! s/\s\+# =>.*$\\|^#\s[>!\~]>\(\s.*\)\?$//g \| :silent! '<,'>s#\($\n\s*\)\+\%$##<CR>
+augroup END
