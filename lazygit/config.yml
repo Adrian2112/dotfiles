@@ -1,0 +1,117 @@
+promptToReturnFromSubprocess: false
+
+keybinding:
+  universal:
+    quit: '<c-c>'
+    refresh: '<f12>'
+  files:
+    viewResetOptions: 'R'
+
+customCommands:
+ - key: 'N'
+   prompts:
+     - type: 'menu'
+       title: 'What kind of branch is it?'
+       options:
+         - name: 'feature'
+           description: 'a feature branch'
+           value: 'feature'
+         - name: 'bug'
+           description: 'a bug branch'
+           value: 'bug'
+         - name: 'task'
+           description: 'a task branch'
+           value: 'task'
+     - type: 'input'
+       title: 'What is the new branch name?'
+       initialValue: 'PLAT-'
+   command: "git checkout -b {{index .PromptResponses 0}}/{{index .PromptResponses 1}}"
+   context: 'localBranches'
+   loadingText: 'creating branch'
+   description: 'create a new RP branch'
+ - key: 't'
+   description: 'touch files'
+   command: 'git status -s --untracked-files=all -- {{.SelectedPath}} | cut -c 4- | xargs touch'
+   context: 'files'
+
+ - key: 'D'
+   description: 'Diff'
+   command: '{{index .PromptResponses 0}}'
+   context: 'status'
+   subprocess: true
+   prompts:
+     - type: 'menu'
+       title: 'Select diff'
+       options:
+         - name: 'all'
+           value: 'git diff HEAD~1'
+         - name: 'all staged'
+           value: 'git diff --staged'
+         - name: 'all unstaged'
+           value: 'git diff'
+
+ - key: 'D'
+   command: 'git diff HEAD~1 -- {{.SelectedPath}}'
+   context: 'files'
+   subprocess: true
+ - key: 'D'
+   command: 'git diff {{.SelectedLocalCommit.Sha}}'
+   context: 'commits'
+   subprocess: true
+ - key: 'D'
+   command: 'git diff {{.SelectedSubCommit.Sha}}'
+   context: 'subCommits'
+   subprocess: true
+ - key: 'D'
+   command: 'git diff {{.SelectedLocalBranch.Name}}'
+   context: 'localBranches'
+   subprocess: true
+ - key: 'D'
+   command: 'git diff {{.SelectedSubCommit.Sha}}~1 -- {{.SelectedCommitFile.Name}}'
+   context: 'commitFiles'
+   subprocess: true
+ - key: 'D'
+   command: 'git stash show stash@{{"{"}}{{.SelectedStashEntry.Index}}{{"}"}} -p'
+   context: 'stash'
+   subprocess: true
+
+ - key: '<c-d>'
+   command: 'git show {{.SelectedLocalCommit.Sha}}'
+   context: 'commits'
+   subprocess: true
+ - key: '<c-d>'
+   command: 'git show {{.SelectedSubCommit.Sha}}'
+   context: 'subCommits'
+   subprocess: true
+
+ - key: 'S'
+   command: 'git delete-squashed'
+   context: 'localBranches'
+   stream: true
+
+git:
+  #branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
+  branchLogCmd: "git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%h%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'"
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  commitPrefixes:
+    Repairpal-Rails: # This is repository folder name
+      pattern: "^(\\w+\\/(\\w+-\\d+|).*|.*)"
+      replace: '[$2] '
+    internal-tools: # This is repository folder name
+      pattern: "^(\\w+\\/(\\w+-\\d+|).*|.*)"
+      replace: '[$2] '
+    estimator: # This is repository folder name
+      pattern: "^(\\w+\\/(\\w+-\\d+|).*|.*)"
+      replace: '[$2] '
+
+gui:
+  showFileTree: false
+  branchColors:
+    'feature': 'green'
+    'bug': 'red'
+    'task': '#11aaff'
+  theme:
+    optionsTextColor:
+      - white

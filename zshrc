@@ -109,3 +109,5 @@ EDITOR=vim
 # add ??, gh? and git??
 eval "$(github-copilot-cli alias -- "$0")"
 
+# lazygit config
+export XDG_CONFIG_HOME="$HOME/.dotfiles"
