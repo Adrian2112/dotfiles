@@ -79,3 +79,9 @@
 [submodule "janus/copilot.vim"]
 	path = janus/copilot.vim
 	url = https://github.com/github/copilot.vim.git
+[submodule "janus/ale"]
+	path = janus/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule "janus/vim-gutentags"]
+	path = janus/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags.git
