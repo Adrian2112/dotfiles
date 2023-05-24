@@ -103,3 +103,6 @@ iphone_notify() {
   msg=${1:-done}
   curl -d $msg ntfy.sh/31c3e65947425c04dc2ed700d1f40ec1
 }
+
+EDITOR=vim
+
