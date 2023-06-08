@@ -166,7 +166,7 @@ command EfactoryR :execute "Efactory " . eval('rails#singularize(expand("<cword>
 """ define functions for fzf.vim
 command! -bang -nargs=? -complete=dir Factories call fzf#vim#files(<q-args> . 'spec/factories', fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=? -complete=dir Models call fzf#vim#files(<q-args> . 'app/models', fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=? -complete=dir Specs call fzf#vim#files(<q-args> . 'spec/', fzf#vim#with_preview({'source': 'ls */**/*_spec.rb'}), <bang>0)
+command! -bang -nargs=? -complete=dir Specs call fzf#vim#files(<q-args> . 'spec/', fzf#vim#with_preview({'source': 'ls **/*.rb | grep -v "factories"'}), <bang>0)
 
 map <leader>r :Rails<CR>
 map <leader>R :.Rails<CR>
