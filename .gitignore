@@ -1,3 +1,5 @@
 .DS_Store
 tags
 lazygit/state.yml
+github-copilot/hosts.json
+githubnext__github-copilot-cli.json
