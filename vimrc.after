@@ -47,7 +47,7 @@ au BufRead,BufNewFile *.ino set filetype=arduino
 
 set autoindent
 
-nnoremap <leader>. :Tags<cr>
+nnoremap <leader>. :Rg<cr>
 
 let g:gitgutter_realtime = 0
 
