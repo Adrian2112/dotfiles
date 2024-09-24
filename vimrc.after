@@ -206,7 +206,7 @@ let g:ale_fix_on_save = 1
 
 let g:ale_linters = {'ruby': ['rubocop'], 'javascript': ['eslint'], 'javascriptreact': ['eslint'], 'sql': ['sqlint', 'sqlformat', 'sqllint', 'sqlfluff']}
 let g:ale_linters_explicit = 1
-let g:ale_ruby_rubocop_options = '--except RSpec/Focus,Naming/BlockForwarding'
+let g:ale_ruby_rubocop_options = '--except RSpec/Focus,Naming/BlockForwarding,Rails/ActiveRecordCallbacksOrder,Style/EmptyMethod,Style/FormatStringToken,Style/HashSyntax,Style/ArgumentForwarding'
 
 let g:ale_pattern_options_enabled = 1
 let g:ale_pattern_options = { 'db/schema.rb': { 'ale_enabled': 0 } }
