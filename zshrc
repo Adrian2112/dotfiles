@@ -90,17 +90,28 @@ export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 
 alias pf="fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
 
-export FORGIT_INSTALL_DIR=/Users/adriangonzalez/Dev/forgit
-source $FORGIT_INSTALL_DIR/forgit.plugin.zsh
-# FORGIT_NO_ALIASES=1
-export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 EDITOR=vim
 
 # add ??, gh? and git??
-eval "$(github-copilot-cli alias -- "$0")"
+# Check if the gh copilot extension is installed and load aliases accordingly
+copilot_shell_suggest() {
+  gh copilot suggest -t shell "$@"
+}
+alias '??'='copilot_shell_suggest'
+
+# Function to handle Git command suggestions
+copilot_git_suggest() {
+  gh copilot suggest -t git "$@"
+}
+alias 'git?'='copilot_git_suggest'
+
+# Function to handle GitHub CLI command suggestions
+copilot_gh_suggest() {
+  gh copilot suggest -t gh "$@"
+}
+alias 'gh?'='copilot_gh_suggest'
 
 # lazygit config
 export XDG_CONFIG_HOME="$HOME/.dotfiles"
