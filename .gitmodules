@@ -85,3 +85,6 @@
 [submodule "janus/vim-gutentags"]
 	path = janus/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
+[submodule "/Users/adriangonzalez/.dotfiles/nvim"]
+	path = /Users/adriangonzalez/.dotfiles/nvim
+	url = https://github.com/LazyVim/starter

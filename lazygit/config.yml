@@ -63,7 +63,7 @@ customCommands:
    context: 'subCommits'
    subprocess: true
  - key: 'D'
-   command: 'git diff {{.SelectedLocalBranch.Name}}'
+   command: 'git diff {{.SelectedLocalBranch.Name}}...'
    context: 'localBranches'
    subprocess: true
  - key: 'D'
@@ -89,9 +89,14 @@ customCommands:
    context: 'localBranches'
    stream: true
 
+ #- key: 'o'
+ #  command: 'open "https://github.com/RepairPal/Repairpal-Rails/compare/{{.SelectedLocalBranch.Name}}?expand=1&template=redwood.md"'
+ #  context: 'localBranches'
+ #  subprocess: false
+
 git:
-  #branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
-  branchLogCmd: "git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%h%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'"
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
+  #branchLogCmd: "git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%h%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'"
   paging:
     colorArg: always
     pager: delta --dark --paging=never
